@@ -17,13 +17,14 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|user_name|string|null: false add_index: true|
+|name|string|null: false add_index: true|
 |email|string|null: false, unique: true|
 |password|string|null: false|
 
 ### Association
 - has_many :messages
-- belongs_to :group
+- has_many :groups, through: :members
+- has_many :members
 
 ## messagesテーブル
 
@@ -36,18 +37,18 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :user
-- has_many :groups, through: :members
+- belongs_to :group
 
 ## groupsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false, add_index: true|
-|user_id|integer|null: false, foreign_key: true|
+|name|string|null: false|
 
 ### Association
-- has_many :users
-- has_many :messages, through: :members
+- has_many :messages
+- has_many :users, through: :members
+- has_many :members
 
 ## membersテーブル
 
