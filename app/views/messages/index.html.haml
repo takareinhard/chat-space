@@ -10,17 +10,20 @@
         %p.side-header__box__user-name name
         %ul.side-header__box__menu
           %li.side-header__box__menu__new-group
-          =link_to "/groups/new", class: "new" do
+          =link_to "#", class: "new" do
             = fa_icon 'edit'
           %li.side-header__box__menu__edit-user
-          =link_to "/users/user_id/edit", class: "edit" do
+          =link_to "#", class: "edit" do
             = fa_icon 'cog'
     .groups
-      %a.groups__new-group{ :href => "/groups/group_id/messages"}
+      %a.groups__new-group 
+      =link_to "#" do
         .group
           %p.group__name test
           %p.group__latest-message test
-      %a.groups__new-group{ :href => "/groups/group_id/messages"}
+
+      %a.groups__new-group
+      =link_to "#" do
         .group
           %p.group__name test
           %p.group__latest-message test
@@ -33,7 +36,8 @@
           Member : 
           %li.main-header__left-box__member-list__member
             &nbsp;member name
-      %a{ :href => "/groups/group_id/edit"}
+      %a
+      =link_to "#" do
         .main-header__edit-btn
           Edit
 
@@ -48,7 +52,7 @@
         %p.message__text test
 
     .form
-      %form{:class => "new_message", :id => "new_message", :enctype => "multipart/form-data", :action => "/groups/group_id/messages", :accept-charset => "UTF-8", :method => "post"}
+      %form{:class => "new_message", :id => "new_message", :enctype => "multipart/form-data", :action => "#", :accept-charset => "UTF-8", :method => "post"}
         %input{:name => "utf8", :type => "hidden", :value => "✓"}
         %input{:type => "hidden", :name => "authenticity_token", :value => "base64_encode"}
         .input-box
