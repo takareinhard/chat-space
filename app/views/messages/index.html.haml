@@ -1,0 +1,59 @@
+
+.flash-box
+  .flash-box__name
+    グループを作成しました
+
+.wrapper
+  .chat-side
+    .side-header
+      .side-header__box
+        %p.side-header__box__user-name name
+        %ul.side-header__box__menu
+          %li.side-header__box__menu__new-group
+          =link_to "/groups/new", class: "new" do
+            = fa_icon 'edit'
+          %li.side-header__box__menu__edit-user
+          =link_to "/users/user_id/edit", class: "edit" do
+            = fa_icon 'cog'
+    .groups
+      %a.groups__new-group{ :href => "/groups/group_id/messages"}
+        .group
+          %p.group__name test
+          %p.group__latest-message test
+      %a.groups__new-group{ :href => "/groups/group_id/messages"}
+        .group
+          %p.group__name test
+          %p.group__latest-message test
+
+  .chat-main
+    .main-header
+      .main-header__left-box
+        %h2.main-header__left-box__current-group test
+        %ul.main-header__left-box__member-list
+          Member : 
+          %li.main-header__left-box__member-list__member
+            &nbsp;member name
+      %a{ :href => "/groups/group_id/edit"}
+        .main-header__edit-btn
+          Edit
+
+    .messages
+      .message
+        -# "data-message_id=something"
+        .message__upper-info
+          %p.message__upper-info__talker
+            membername
+          %p.message__upper-info__date
+            2019/00/00(week) 00:00:00
+        %p.message__text test
+
+    .form
+      %form{:class => "new_message", :id => "new_message", :enctype => "multipart/form-data", :action => "/groups/group_id/messages", :accept-charset => "UTF-8", :method => "post"}
+        %input{:name => "utf8", :type => "hidden", :value => "✓"}
+        %input{:type => "hidden", :name => "authenticity_token", :value => "base64_encode"}
+        .input-box
+          %input{:placeholder => "type a message", :class => "input-box__text", :type => "text", :name => "message[content]", :id => "message_content"}
+          %label{:class => "input-box__image", :for => "message_image"}
+            %i{:class => "fa fa-image"}
+            %input{:class => "input-box__image__file", :type => "file", :name => "message[image]", :id => "message_image"}
+        %input{:type => "submit", :name => "commit", :value => "Send", :class => "submit-btn", :data-disable-with => "Send"}
