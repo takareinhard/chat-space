@@ -43,14 +43,7 @@
           Edit
 
     .messages
-      .message
-        -# "data-message_id=something"
-        .message__upper-info
-          %p.message__upper-info__talker
-            membername
-          %p.message__upper-info__date
-            2019/00/00(week) 00:00:00
-        %p.message__text test
+      = render @messages
 
     .form
       = form_for [@group, @message] do |f|
