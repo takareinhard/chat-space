@@ -4,7 +4,6 @@
 
 .chat-main {
   width: calc(100vw - 300px);
-  float: right;
 }
 
 .main-header {
@@ -98,7 +97,7 @@
     }
   }
   &__submit {
-    background-color: blue;
+    background-color: $mainBlueColor;
     border: none;
     color: white;
     float: right;
