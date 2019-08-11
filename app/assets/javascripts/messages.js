@@ -12,9 +12,11 @@ $(function(){
       processData: false,
       contentType: false
     })
-    .done(function()}
-      console.log()
-  })
-  fail
+    .done(function(message){
+      console.log(message.content);
+    })
+    .fail(function(){
+      console.log('fail');
+    })
   })
 });
