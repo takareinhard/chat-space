@@ -42,7 +42,7 @@ $(function(){
       var html = buildMessage(message);
       $('.messages').append(html)
       $('#message_content').val('')
-      $('html, body').animate({scrollTop: $(document).height()},100);
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
     })
     .fail(function(){
       alert('エラー');
