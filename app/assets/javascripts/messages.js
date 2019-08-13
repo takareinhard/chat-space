@@ -1,6 +1,8 @@
 $(function(){
 
   function buildMessage(message){
+    var content = message.content ? `${ message.content }` : "";
+    var img = message.image ? `<img src= ${ message.image }>` : "";
     var html = `<div class="message">
                 <div class="upper-message">
                 <div class="upper-message__user-name">
@@ -12,21 +14,22 @@ $(function(){
                 </div>
                 <div class="lower-message">
                 <p class="lower-message__content">
-                ${message.content}
+                ${content}
                 </p>
-                
+                ${img}
                 </div>
                 </div>`
 
     return html;
   }
 
-
-
   $('#new_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $(this).attr('action');
+
+    $('.form__submit').removeAttr('data-disable-with');
+
     $.ajax({
       url: url,
       type: "POST",
@@ -39,9 +42,10 @@ $(function(){
       var html = buildMessage(message);
       $('.messages').append(html)
       $('#message_content').val('')
+      $('html, body').animate({scrollTop: $(document).height()},100);
     })
     .fail(function(){
-      console.log('fail');
+      alert('エラー');
     })
   })
 });
