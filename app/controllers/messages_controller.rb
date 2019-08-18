@@ -29,4 +29,9 @@ class MessagesController < ApplicationController
   def set_group
     @group = Group.find(params[:group_id])
   end
+
+  def group_params
+    params.require(:group).permit(:any, category_ids: [])
+  end
+
 end
