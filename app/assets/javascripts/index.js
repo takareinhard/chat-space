@@ -35,7 +35,7 @@ function appendList(userName, userId) {
     $.ajax({
       type: 'GET',
       url: '/users',
-      data: { keyword: input },
+      data: { keyword: input},
       dataType: 'json'
     })
 
