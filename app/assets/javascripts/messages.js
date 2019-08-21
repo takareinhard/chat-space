@@ -3,24 +3,24 @@ $(function() {
   function buildHTML(message) {
     var content = message.content ? `${ message.content }` : "";
     var img  = message.image.url ? `${ message.image.url }` : "";
-    var html =   '<div class="message" data-id=' + message.id + '>' +
-      '<div class="upper-message">' +
-        '<div class="upper-message__user-name">' +
-          message.user_name +
-        '</div>' +
-        '<div class="upper-message__date">' +
-          message.created_at +
-        '</div>' +
-      '</div>' +
-      '<div class="lower-message">' +
-        '<p class="lower-message__content">' +
-          content +
-        '</p>' +
-        '<img src="' + img + '" class="lower-message__image" >' +
-      '</div>' +
-    '</div>'
-      return html;
-    }
+    var html =   `<div class="message" data-id="${message.id}"> 
+            <div class="upper-message">
+              <div class="upper-message__user-name">
+                ${message.user_name}
+              </div>
+              <div class="upper-message__date">
+                ${message.created_at}
+              </div>
+            </div>
+            <div class="lower-meesage">
+              <p class="lower-message__content">
+                ${content}
+              </p>
+              <img class= "lower-message__image" src=${img} >
+            </div>
+          </div>`
+        return html;
+       }
 
     $('#new_message').on('submit', function(e){
     e.preventDefault();
