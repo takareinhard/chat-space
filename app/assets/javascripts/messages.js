@@ -1,58 +1,28 @@
 $(function() {
 
   function buildHTML(message) {
-    if (message.content && message.image.url) {
-      var html = '<div class="message" data-id=' + message.id + '>' +
-        '<div class="upper-message">' +
-          '<div class="upper-message__user-name">' +
-            message.user_name +
-          '</div>' +
-          '<div class="upper-message__date">' +
-            message.created_at +
-          '</div>' +
+    var content = message.content ? `${ message.content }` : "";
+    var img  = message.image.url ? `${ message.image.url }` : "";
+    var html =   '<div class="message" data-id=' + message.id + '>' +
+      '<div class="upper-message">' +
+        '<div class="upper-message__user-name">' +
+          message.user_name +
         '</div>' +
-        '<div class="lower-message">' +
-          '<p class="lower-message__content">' +
-            message.content +
-          '</p>' +
-          '<img src="' + message.image.url + '" class="lower-message__image" >' +
+        '<div class="upper-message__date">' +
+          message.created_at +
         '</div>' +
-      '</div>'
-    } else if (message.content) {
-      var html = '<div class="message" data-id=' + message.id + '>' +
-        '<div class="upper-message">' +
-          '<div class="upper-message__user-name">' +
-            message.user_name +
-          '</div>' +
-          '<div class="upper-message__date">' +
-            message.created_at +
-          '</div>' +
-        '</div>' +
-        '<div class="lower-message">' +
-          '<p class="lower-message__content">' +
-            message.content +
-          '</p>' +
-        '</div>' +
-      '</div>'
-    } else if (message.image.url) {
-      var html = '<div class="message" data-id=' + message.id + '>' +
-        '<div class="upper-message">' +
-          '<div class="upper-message__user-name">' +
-            message.user_name +
-          '</div>' +
-          '<div class="upper-message__date">' +
-            message.created_at +
-          '</div>' +
-        '</div>' +
-        '<div class="lower-message">' +
-          '<img src="' + message.image.url + '" class="lower-message__image" >' +
-        '</div>' +
-      '</div>'
-    };
-    return html;
-  };
+      '</div>' +
+      '<div class="lower-message">' +
+        '<p class="lower-message__content">' +
+          content +
+        '</p>' +
+        '<img src="' + img + '" class="lower-message__image" >' +
+      '</div>' +
+    '</div>'
+      return html;
+    }
 
-  $('#new_message').on('submit', function(e){
+    $('#new_message').on('submit', function(e){
     e.preventDefault();
     var formData = new FormData(this);
     var url = $(this).attr('action');
@@ -75,30 +45,30 @@ $(function() {
     })
     .fail(function(){
       alert('エラー');
+      });
     });
-  });
 
-var reloadMessages = function() {
-  if (window.location.href.match(/\/groups\/\d+\/messages/)){
-  last_message_id = $('.message:last').data('id'); 
-  $.ajax({
-    url: "api/messages" ,
-    type: 'get',
-    dataType: 'json',
-    data: {id: last_message_id}
-  })
-  .done(function(messages) {
-    var insertHTML = '';
-    messages.forEach(function(message){
-    insertHTML = buildHTML(message);
-    $('.messages').append(insertHTML);
-  })
-    $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
-  })
-  .fail(function() {
-    alert('error');
-  });
- }
-};
-  setInterval(reloadMessages, 5000);
-});
+    var reloadMessages = function() {
+    if (window.location.href.match(/\/groups\/\d+\/messages/)){
+    last_message_id = $('.message:last').data('id'); 
+    $.ajax({
+      url: "api/messages" ,
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      var insertHTML = '';
+      messages.forEach(function(message){
+      insertHTML = buildHTML(message);
+      $('.messages').append(insertHTML);
+    })
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+    })
+    .fail(function() {
+      alert('error');
+        });
+      }
+    };
+    setInterval(reloadMessages, 5000);
+    });
