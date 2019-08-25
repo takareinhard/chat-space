@@ -32,3 +32,7 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+
+# nokogiriは libxml2-devel, libxslt-devel がインストールされていない場合もコンパイルに失敗するのでインストールしておきましょう。
+# Capistrano の場合は以下を設定する
+set :bundle_env_variables, { nokogiri_use_system_libraries: 1 }
