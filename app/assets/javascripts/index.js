@@ -1,7 +1,17 @@
 $(function() {
 
+  $(document).on('click', '.user-search-add', function (){
+    var userName = $(this).data('user-name');
+    var userId = $(this).data('user-id');
+    appendList(userName, userId);
+    $(this).parent().remove();
+  })
+  $(document).on('click', '.user-search-remove', function(){
+    $(this).parent().remove();
+  })
+
 var search_list = $("#user-search-result");
-var selected_list = $(".chat-group-users");
+var selected_list = $("#chat-group-users");
 
 function appendUser(user) {
   var html = `<div class="chat-group-user clearfix">
@@ -20,18 +30,17 @@ function appendErrMsgToHTML(msg) {
 
 function appendList(userName, userId) {
   
-  var html = `<div class='chat-group-user'>
-                <input name='group[user_ids][]' type='hidden' value='${userId}'>
-                <p class='chat-group-user__name'>${userName}</p>
-                <div class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</div>
+  var remove_html = `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+                <input name='group[user_ids][]' type='hidden' value='${ userId }'>
+                <p class='chat-group-user__name'>${ userName }</p>
+                <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
               </div>`
-  selected_list.append(html);
+  selected_list.append(remove_html);
 }
 
   $("#user-search-field").on("keyup", function(e) {
     e.preventDefault();
     var input = $("#user-search-field").val();
-
 
     $.ajax({
       type: 'GET',
@@ -43,9 +52,9 @@ function appendList(userName, userId) {
     .done(function(users) {
       $('#user-search-result').empty();
       if (users.length !== 0) {
-      users.forEach(function(user){
-      appendUser(user);
-      });
+        users.forEach(function(user){
+          appendUser(user);
+        });
        }
       else {
         appendErrMsgToHTML("ユーザー検索に失敗しました");
@@ -55,15 +64,4 @@ function appendList(userName, userId) {
       alert('error');
     });
   });
-  $(document).on('click', '.user-search-add', function (){
-    const userName = $(this).data('user-name');
-    const userId = $(this).data('user-id');
-    $(this).append(appendList(userName, userId));
-  });
-  $(document).on('click', '.user-search-add', function () {
-    $(this).parent().remove();
-      });
-  $(document).on('click', '.user-search-remove', function(){
-    $(this).parent().remove();
-      })
 });
