@@ -1,15 +1,5 @@
 $(function() {
 
-  $(document).on('click', '.user-search-add', function (){
-    var userName = $(this).data('user-name');
-    var userId = $(this).data('user-id');
-    appendList(userName, userId);
-    $(this).parent().remove();
-  })
-  $(document).on('click', '.user-search-remove', function(){
-    $(this).parent().remove();
-  })
-
 var search_list = $("#user-search-result");
 var selected_list = $("#chat-group-users");
 
@@ -51,7 +41,7 @@ function appendList(userName, userId) {
 
     .done(function(users) {
       $('#user-search-result').empty();
-      if (users.length !== 0) {
+      if (input !== "") {
         users.forEach(function(user){
           appendUser(user);
         });
@@ -64,4 +54,15 @@ function appendList(userName, userId) {
       alert('error');
     });
   });
-});
+
+  $("#user-search-result").on('click', '.user-search-add', function (){
+    var userName = $(this).data('user-name');
+    var userId = $(this).data('user-id');
+
+    appendList(userName, userId);
+    $(this).parent().remove();
+  });
+  $("#user-search-result").on('click', '.user-search-remove', function(){
+    $(this).parent().remove();
+    });
+  });
