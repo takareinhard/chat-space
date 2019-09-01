@@ -31,6 +31,7 @@ function appendList(userName, userId) {
   $("#user-search-field").on("keyup", function(e) {
     e.preventDefault();
     var input = $("#user-search-field").val();
+    if (input !== "") {
 
     $.ajax({
       type: 'GET',
@@ -41,7 +42,7 @@ function appendList(userName, userId) {
 
     .done(function(users) {
       $('#user-search-result').empty();
-      if (input !== "") {
+      if (users.length !== 0) {
         users.forEach(function(user){
           appendUser(user);
         });
@@ -53,6 +54,7 @@ function appendList(userName, userId) {
     .fail(function() {
       alert('error');
     });
+    }
   });
 
   $("#user-search-result").on('click', '.user-search-add', function (){
