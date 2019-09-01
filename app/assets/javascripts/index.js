@@ -57,14 +57,14 @@ function appendList(userName, userId) {
     }
   });
 
-  $("#user-search-result").on('click', '.user-search-add', function (){
+  $(document).on('click', '.user-search-add', function (){
     var userName = $(this).data('user-name');
     var userId = $(this).data('user-id');
 
     appendList(userName, userId);
     $(this).parent().remove();
   });
-  $("#user-search-result").on('click', '.user-search-remove', function(){
+  $(document).on('click', '.user-search-remove', function(){
     $(this).parent().remove();
     });
   });
