@@ -69,8 +69,16 @@ gem "font-awesome-rails"
 gem 'devise'
 gem 'carrierwave'
 gem 'fog-aws'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
 gem 'mini_magick'
 
 group :production do
   gem 'unicorn', '5.4.1'
 end
+
+gem 'dotenv-rails'
